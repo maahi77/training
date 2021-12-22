@@ -1,4 +1,4 @@
-package com.asml.training.repository;
+package com.asml.petclinic.repository;
 
 import com.asml.training.entity.Employee;
 import org.springframework.stereotype.Component;
