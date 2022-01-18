@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.asml.petclinic.model.Appointment;
 import com.asml.petclinic.model.Pet;
 import com.asml.petclinic.repository.impl.PetDaoImpl;
 import com.asml.petclinic.service.PetService;
@@ -31,6 +32,11 @@ public class PetServiceImpl implements PetService {
 		return petDaoImpl.findByAges(age);
 	}
 	
-	
+	@Override
+	public void add(Pet pet) {
+          
+		petDaoImpl.add(pet);
+	}
+
 
 }

@@ -23,6 +23,16 @@ public class OwnerDaoImpl {
 
     public final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("local");
     
+    /* 
+     * This method returns list of
+     * owners 
+     * 
+     * @author mahendra
+     * @since 2021-12-10
+     * @return named query This will return list of owners
+     * @exception emptyList On List is empty
+     *
+     */
 
 
 	public List<Owner> getAll() {
@@ -32,6 +42,19 @@ public class OwnerDaoImpl {
         return Optional.ofNullable(namedQuery.getResultList()).orElse(Collections.emptyList());
 
 	}
+     
+    /* 
+     * This method returns list of
+     * owners  by owner name
+     * 
+     * @author mahendra
+     *@param owner_name is the parameter for this method
+
+     * @since 2021-12-10
+     * @return named query This will return list of owners
+     * @exception emptyList On List is empty
+     *
+     */
 
 	public List<Owner> getByName(String owner_name) {
         EntityManager manager = entityManagerFactory.createEntityManager();
@@ -40,6 +63,21 @@ public class OwnerDaoImpl {
         return Optional.ofNullable(namedQuery.getResultList()).orElse(Collections.emptyList());
 
 	}
+	
+	 
+    /* 
+     * This method returns list of
+     * owners  by owner name and num
+     * 
+     * @author mahendra
+     *@param owner_name is the first parameter for this method
+     *@param num is the second parameter for this method
+     * @since 2021-12-10
+     * @return named query This will return list of owners
+     * @exception emptyList On List is empty
+     *
+     */
+
 
 	public List<Owner> getByNameAndNum(String owner_name, Integer num) {
                
@@ -56,5 +94,16 @@ public class OwnerDaoImpl {
     	return Optional.ofNullable(query.getResultList()).orElse(Collections.emptyList());
 		
 	}
+	 
+	public void add(Owner owner) {
+		
+        EntityManager manager = entityManagerFactory.createEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+        manager.persist(owner);
+        tx.commit();
+
+	}
+
 
 }

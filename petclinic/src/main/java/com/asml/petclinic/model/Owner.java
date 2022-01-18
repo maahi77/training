@@ -18,6 +18,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+/* 
+ * @author mahendra
+ * 
+ * Owner class contains details 
+ * about owners of pets
+ *
+ */
 
 @Entity
 @Data

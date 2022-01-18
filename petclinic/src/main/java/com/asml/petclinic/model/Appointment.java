@@ -1,7 +1,12 @@
 package com.asml.petclinic.model;
 
-import java.util.HashSet;
-import java.util.Set;
+/* 
+ * @author mahendra
+ * 
+ * Appointment class contains details 
+ * about appointments details
+ *
+ */
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

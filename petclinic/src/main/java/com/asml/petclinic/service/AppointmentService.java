@@ -9,5 +9,6 @@ public interface AppointmentService {
     List<Appointment> get();
 	List<Appointment> findByDay(Integer day);
     List<Appointment> findByTime(Integer stime);
+	public void add(Appointment appointment);
 
 }

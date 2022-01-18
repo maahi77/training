@@ -31,10 +31,13 @@ public class VetServiceImpl implements VetService {
 
 	@Override
 	public List<Vet> findByLikeName(String name) {
-		// TODO Auto-generated method stub
 		return vetDaoImpl.findByVetNameLike(name);
 	}
 	
-	
+	@Override
+	public void add(Vet vet) {
+          
+		vetDaoImpl.add(vet);
+	}
 
 }

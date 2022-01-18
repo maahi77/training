@@ -23,9 +23,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
+/* 
+ * @author bindu
+ * 
+ * Vet class contains details 
+ * about vets
+ *
+ */
+
 @Entity
 @Data
-
 @ToString
 @NamedQuery(name="Vet.findall",query = "select e from Vet e ")
 @NamedQuery(name="Vet.findbyvetname",query = "select e from Vet e where e.name=:name")

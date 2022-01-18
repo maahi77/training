@@ -24,6 +24,17 @@ public class AppointmentDaoImpl {
 	
     public final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("local");
     
+    
+    /* 
+     * This method returns list of
+     * appointments 
+     * 
+     * @author mahendra
+     * @since 2021-12-10
+     * @return named query This will return list of appointemnts
+     * @exception emptyList On List is empty
+     *
+     */
 
 
 	public List<Appointment> getAll() {
@@ -33,6 +44,21 @@ public class AppointmentDaoImpl {
         return Optional.ofNullable(namedQuery.getResultList()).orElse(Collections.emptyList());
 
 	}
+	
+	
+      
+    /* 
+     * This method returns list of
+     * appointments  by day
+     * 
+     * @author mahendra
+     *@param day is the parameter for this method
+
+     * @since 2021-12-10
+     * @return named query This will return list of appointemnts
+     * @exception emptyList On List is empty
+     *
+     */
 
 	public List<Appointment> getByDay(Integer day) {
         EntityManager manager = entityManagerFactory.createEntityManager();
@@ -41,6 +67,19 @@ public class AppointmentDaoImpl {
         return Optional.ofNullable(namedQuery.getResultList()).orElse(Collections.emptyList());
 
 	}
+    /* 
+     * This method returns list of
+     * appointments  by stimestime
+     * 
+     * @author mahendra
+     *@param day is the parameter for this method
+
+     * @since 2021-12-10
+     * @return named query This will return list of appointemnts
+     * @exception emptyList On List is empty
+     *
+     */
+
 
 	public List<Appointment> findByStime(Integer stime) {
 		
@@ -52,6 +91,22 @@ public class AppointmentDaoImpl {
     	TypedQuery<Appointment> query=manager.createQuery(cq);
     	return Optional.ofNullable(query.getResultList()).orElse(Collections.emptyList());
 
+
+	}
+    /* 
+     * This method add appointment 
+     * details into Appointment table
+     * 
+     * @author mahendra
+     */
+
+	public void add(Appointment appointment) {
+		
+        EntityManager manager = entityManagerFactory.createEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+        manager.persist(appointment);
+        tx.commit();
 
 	}
 

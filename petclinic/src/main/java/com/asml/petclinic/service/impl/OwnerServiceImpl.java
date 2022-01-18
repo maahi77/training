@@ -34,6 +34,11 @@ public class OwnerServiceImpl implements OwnerService {
 		return ownerDaoImpl.getByNameAndNum(owner_name,num);
 	}
 
+	@Override
+	public void add(Owner owner) {
+          
+		ownerDaoImpl.add(owner);
+	}
 
 	  
 

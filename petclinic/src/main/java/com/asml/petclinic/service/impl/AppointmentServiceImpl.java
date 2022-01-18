@@ -34,5 +34,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 
+	@Override
+	public void add(Appointment appointment) {
+          
+		appointmentDaoImpl.add(appointment);
+	}
+
+
 
 }

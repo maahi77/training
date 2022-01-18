@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -23,6 +24,18 @@ public class VetDaoImpl {
     public final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("local");
 
 
+    
+    /* 
+     * This method returns list of
+     * vets 
+     * 
+     * @author bindu
+     * @since 2021-12-10
+     * @return named query This will return list of pets
+     * @exception emptyList On List is empty
+     *
+     */
+
 	public List<Vet> getAll() {
     
         EntityManager manager = entityManagerFactory.createEntityManager();
@@ -30,6 +43,19 @@ public class VetDaoImpl {
         return Optional.ofNullable(namedQuery.getResultList()).orElse(Collections.emptyList());
 
 	}
+
+    /* 
+     * This method returns list of
+     * vets  by vet name
+     * 
+     * @author bindu
+     *@param name is the parameter for this method
+
+     * @since 2021-12-10
+     * @return named query This will return list of pets
+     * @exception emptyList On List is empty
+     *
+     */
 
 
 	public List<Vet> findByVetName(String name) {
@@ -40,6 +66,19 @@ public class VetDaoImpl {
         return Optional.ofNullable(namedQuery.getResultList()).orElse(Collections.emptyList());
 		
 	}
+
+    /* 
+     * This method returns list of
+     * vets  by vet name
+     * 
+     * @author bindu
+     *@param name is the parameter for this method
+
+     * @since 2021-12-10
+     * @return named query This will return list of pets
+     * @exception emptyList On List is empty
+     *
+     */
 
 
 	public List<Vet> findByVetNameLike(String name) {
@@ -53,4 +92,15 @@ public class VetDaoImpl {
     	return Optional.ofNullable(query.getResultList()).orElse(Collections.emptyList());
 
 	}
+	
+	public void add(Vet vet) {
+		
+        EntityManager manager = entityManagerFactory.createEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+        manager.persist(vet);
+        tx.commit();
+
+	}
+
 }

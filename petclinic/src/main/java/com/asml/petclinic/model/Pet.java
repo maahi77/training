@@ -1,6 +1,14 @@
 package com.asml.petclinic.model;
 
 import java.util.HashSet;
+/* 
+ * @author bindu
+ * 
+ * Pet class contains details 
+ * about pets
+ *
+ */
+
 import java.util.Set;
 
 import javax.persistence.Entity;

@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -23,6 +24,17 @@ public class PetDaoImpl {
 	
     public final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("local");
 
+    /* 
+     * This method returns list of
+     * pets 
+     * 
+     * @author bindu
+     * @since 2021-12-10
+     * @return named query This will return list of pets
+     * @exception emptyList On List is empty
+     *
+     */
+
 
 	public List<Pet> getAll() {
     
@@ -31,6 +43,19 @@ public class PetDaoImpl {
         return Optional.ofNullable(namedQuery.getResultList()).orElse(Collections.emptyList());
 
 	}
+
+    /* 
+     * This method returns list of
+     * pets  by pet type
+     * 
+     * @author bindu
+     *@param type is the parameter for this method
+
+     * @since 2021-12-10
+     * @return named query This will return list of pets
+     * @exception emptyList On List is empty
+     *
+     */
 
 
 	public List<Pet> findByBreed(String type) {
@@ -42,6 +67,19 @@ public class PetDaoImpl {
    
 		
 	}
+
+    /* 
+     * This method returns list of
+     * pets  by pet age
+     * 
+     * @author bindu
+     *@param age is the parameter for this method
+
+     * @since 2021-12-10
+     * @return named query This will return list of pets
+     * @exception emptyList On List is empty
+     *
+     */
 
 
 	public List<Pet> findByAges(Integer age) {
@@ -58,6 +96,15 @@ public class PetDaoImpl {
 	}
 	
 	
-	
+	public void add(Pet pet) {
+		
+        EntityManager manager = entityManagerFactory.createEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+        tx.begin();
+        manager.persist(pet);
+        tx.commit();
+
+	}
+
 
 }
