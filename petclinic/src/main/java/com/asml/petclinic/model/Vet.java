@@ -12,16 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 
 /* 
@@ -33,16 +28,15 @@ import lombok.ToString;
  */
 
 @Entity
-@Data
-@ToString
-@NamedQuery(name="Vet.findall",query = "select e from Vet e ")
+@NamedQueries({@NamedQuery(name="Vet.findall",query = "select e from Vet e "),
 @NamedQuery(name="Vet.findbyvetname",query = "select e from Vet e where e.name=:name")
+})
 @Table(name = "Vets")
 public class Vet {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long vet_id;
+	private Long vetid;
 	private String name;
 	private Long phnum;
 	
@@ -60,22 +54,21 @@ public class Vet {
 	
 	public Vet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Vet(Long vet_id, String name, Long phnum) {
+	public Vet(Long vetid, String name, Long phnum) {
 		super();
-		this.vet_id = vet_id;
+		this.vetid = vetid;
 		this.name = name;
 		this.phnum = phnum;
 	}
 
-	public Long getVet_id() {
-		return vet_id;
+	public Long getVetid() {
+		return vetid;
 	}
 
-	public void setVet_id(Long vet_id) {
-		this.vet_id = vet_id;
+	public void setVet_id(Long vetid) {
+		this.vetid = vetid;
 	}
 
 	public String getName() {
@@ -108,6 +101,12 @@ public class Vet {
 
 	public void setAppointments(Set<Appointment> appointments) {
 		this.appointments = appointments;
+	}
+
+	@Override
+	public String toString() {
+		return "Vet [vetid=" + vetid + ", name=" + name + ", phnum=" + phnum + ", pets=" + pets + ", appointments="
+				+ appointments + "]";
 	}
 
 

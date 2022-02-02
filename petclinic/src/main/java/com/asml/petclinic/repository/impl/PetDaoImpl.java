@@ -18,9 +18,10 @@ import org.springframework.stereotype.Repository;
 import com.asml.petclinic.model.Appointment;
 import com.asml.petclinic.model.Owner;
 import com.asml.petclinic.model.Pet;
+import com.asml.petclinic.repository.AbstarctDao;
 
 @Repository
-public class PetDaoImpl {
+public class PetDaoImpl extends AbstarctDao<Pet>{
 	
     public final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("local");
 
@@ -39,12 +40,12 @@ public class PetDaoImpl {
     
     
     
-	public void adding(Pet pet) {
+	public void adding(Pet e) {
 		
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
-        manager.persist(pet);
+        manager.persist(e);
         tx.commit();
 
 	}
@@ -74,7 +75,7 @@ public class PetDaoImpl {
 	public List<Pet> findByBreed(String type) {
 		
         EntityManager manager = entityManagerFactory.createEntityManager();
-        TypedQuery<Pet> namedQuery = manager.createNamedQuery("Pet.finbytype", Pet.class);
+        TypedQuery<Pet> namedQuery = manager.createNamedQuery("Pet.findbytype", Pet.class);
         namedQuery.setParameter("type",type);
         return Optional.ofNullable(namedQuery.getResultList()).orElse(Collections.emptyList());
    

@@ -11,7 +11,7 @@ public interface PetService {
     List<Pet> get();
 	List<Pet> findByType(String type);
     List<Pet> findByAge(Integer age);
-	public void add(Pet pet);
+	public void add(Pet e);
 
 }
 

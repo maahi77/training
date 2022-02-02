@@ -14,25 +14,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+
 
 @Entity
-@ToString
-@NamedQuery(name="Appointment.findall",query = "select e from Appointment e ")
-@NamedQuery(name="Appointment.findbyday",query = "select e from Appointment e where e.day=:day")
+@NamedQueries ({@NamedQuery(name="Appointment.findall",query = "select e from Appointment e "),
+             @NamedQuery(name="Appointment.findbyday",query = "select e from Appointment e where e.day=:day")
+  })
 @Table(name = "Appointments")
 public class Appointment {
   
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer appointment_id;
+	private Integer appointmentid;
 	private double price;
 	private Integer day;
 	private Integer month;
@@ -44,12 +41,11 @@ public class Appointment {
 	
 	public Appointment() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public Appointment(Integer appointment_id, double price, Integer day, Integer month, Integer year, Integer stime,
+	public Appointment(Integer appointmentid, double price, Integer day, Integer month, Integer year, Integer stime,
 			String meridian) {
 		super();
-		this.appointment_id = appointment_id;
+		this.appointmentid = appointmentid;
 		this.price = price;
 		this.day = day;
 		this.month = month;
@@ -58,18 +54,18 @@ public class Appointment {
 		this.meridian = meridian;
 	}
 	@ManyToOne
-	@JoinColumn(name = "owner_name",referencedColumnName = "owner_name")
+	@JoinColumn(name = "ownername",referencedColumnName = "ownername")
 	private Owner owner;
 	@ManyToOne
-	@JoinColumn(name = "vet_id")
+	@JoinColumn(name = "vetid")
 	private Vet vet;
 
 	
-	public Integer getAppointment_id() {
-		return appointment_id;
+	public Integer getAppointmentid() {
+		return appointmentid;
 	}
-	public void setAppointment_id(Integer appointment_id) {
-		this.appointment_id = appointment_id;
+	public void setAppointmentid(Integer appointmentid) {
+		this.appointmentid = appointmentid;
 	}
 	public double getPrice() {
 		return price;
@@ -118,6 +114,12 @@ public class Appointment {
 	}
 	public void setVet(Vet vet) {
 		this.vet = vet;
+	}
+	@Override
+	public String toString() {
+		return "Appointment [appointmentid=" + appointmentid + ", price=" + price + ", day=" + day + ", month=" + month
+				+ ", year=" + year + ", stime=" + stime + ", meridian=" + meridian + ", owner=" + owner + ", vet=" + vet
+				+ "]";
 	}
 	
 	

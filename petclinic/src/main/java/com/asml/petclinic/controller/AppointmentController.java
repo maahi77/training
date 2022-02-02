@@ -16,7 +16,7 @@ public class AppointmentController {
 	
 	@Autowired
 	AppointmentService appointmentService ;
-    @GetMapping("/appointment")
+    @GetMapping("/allappointments")
     public List<Appointment> getAllAppointments ()
     {
     	
@@ -29,13 +29,13 @@ public class AppointmentController {
         return appointmentService.findByDay(day);
     }
 
-      @GetMapping("/between")
+      @GetMapping("/appointmentsbetween")
       public List<Appointment> getByStime(Integer stime)
       {
     	  return appointmentService.findByTime(stime);
       }
     
-    @PostMapping("/appointments")
+    @PostMapping("/appointments/add")
     public void add(@RequestBody Appointment appointment) {
     	
     	 appointmentService.add(appointment);

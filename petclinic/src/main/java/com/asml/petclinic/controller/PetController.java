@@ -22,7 +22,7 @@ public class PetController {
 	@Autowired
 	PetService petService;
 	
-    @GetMapping("/pet")
+    @GetMapping("/allpets")
     public List<Pet> getAllAppointments ()
     {
         return petService.get();
@@ -35,12 +35,12 @@ public class PetController {
     }
 
  
-    @GetMapping("/petbetween")
+    @GetMapping("/petbetweenage")
     public List<Pet> getAge( Integer age){
     	return petService.findByAge(age);
     }
      
-    @PostMapping("/pets")
+    @PostMapping("/pets/add")
     public void adds(@RequestBody Pet pet) {
     	
     	 petService.add(pet);

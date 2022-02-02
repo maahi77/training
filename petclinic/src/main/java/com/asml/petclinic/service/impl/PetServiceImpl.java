@@ -33,9 +33,9 @@ public class PetServiceImpl implements PetService {
 	}
 	
 	@Override
-	public void add(Pet pet) {
+	public void add(Pet e) {
           
-		petDaoImpl.adding(pet);
+		petDaoImpl.adding(e);
 	}
 
 

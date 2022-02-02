@@ -17,9 +17,10 @@ import org.springframework.stereotype.Repository;
 
 import com.asml.petclinic.model.Pet;
 import com.asml.petclinic.model.Vet;
+import com.asml.petclinic.repository.AbstarctDao;
 
 @Repository
-public class VetDaoImpl {
+public class VetDaoImpl extends AbstarctDao<Vet> {
 	
     public final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("local");
 
@@ -61,7 +62,7 @@ public class VetDaoImpl {
 	public List<Vet> findByVetName(String name) {
 		
         EntityManager manager = entityManagerFactory.createEntityManager();
-        TypedQuery<Vet> namedQuery = manager.createNamedQuery("Vet.finbyvetname", Vet.class);
+        TypedQuery<Vet> namedQuery = manager.createNamedQuery("Vet.findbyvetname", Vet.class);
         namedQuery.setParameter("name",name);
         return Optional.ofNullable(namedQuery.getResultList()).orElse(Collections.emptyList());
 		
@@ -93,12 +94,12 @@ public class VetDaoImpl {
 
 	}
 	
-	public void add(Vet vet) {
+	public void add(Vet e) {
 		
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
-        manager.persist(vet);
+        manager.persist(e);
         tx.commit();
 
 	}

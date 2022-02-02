@@ -9,16 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 /* 
  * @author mahendra
  * 
@@ -28,17 +23,16 @@ import lombok.ToString;
  */
 
 @Entity
-@Data
-@ToString
-@NamedQuery(name="Owner.findall",query = "select e from Owner e ")
-@NamedQuery(name="Owner.findbyname",query = "select e from Owner e where e.owner_name=:owner_name")
+@NamedQueries({ @NamedQuery(name="Owner.findall",query = "select e from Owner e "),
+   @NamedQuery(name="Owner.findbyname",query = "select e from Owner e where e.ownername=:ownername")
+})
 @Table(name = "Owners")
 public class Owner {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer owner_id;
-	private String owner_name;
+	private Integer ownerid;
+	private String ownername;
 	private Long num;
 	private String village;
 	private String state;
@@ -47,13 +41,12 @@ public class Owner {
 	
 	public Owner() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Owner(Integer owner_id, String owner_name, Long num, String village, String state, Long pincode) {
+	public Owner(Integer ownerid, String ownername, Long num, String village, String state, Long pincode) {
 		super();
-		this.owner_id = owner_id;
-		this.owner_name = owner_name;
+		this.ownerid = ownerid;
+		this.ownername = ownername;
 		this.num = num;
 		this.village = village;
 		this.state = state;
@@ -66,20 +59,20 @@ public class Owner {
 	@OneToMany(cascade =CascadeType.ALL,mappedBy = "owner")
 	private List<Appointment> appointment=new ArrayList<>();
 
-	public Integer getOwner_id() {
-		return owner_id;
+	public Integer getOwnerid() {
+		return ownerid;
 	}
 
-	public void setOwner_id(Integer owner_id) {
-		this.owner_id = owner_id;
+	public void setOwnerid(Integer ownerid) {
+		this.ownerid = ownerid;
 	}
 
-	public String getOwner_name() {
-		return owner_name;
+	public String getOwnername() {
+		return ownername;
 	}
 
-	public void setOwner_name(String owner_name) {
-		this.owner_name = owner_name;
+	public void setOwnername(String ownername) {
+		this.ownername = ownername;
 	}
 
 	public Long getNum() {
@@ -128,6 +121,12 @@ public class Owner {
 
 	public void setAppointment(List<Appointment> appointment) {
 		this.appointment = appointment;
+	}
+
+	@Override
+	public String toString() {
+		return "Owner [ownerid=" + ownerid + ", ownername=" + ownername + ", num=" + num + ", village=" + village
+				+ ", state=" + state + ", pincode=" + pincode + ", pets=" + pets + ", appointment=" + appointment + "]";
 	}
 	
 

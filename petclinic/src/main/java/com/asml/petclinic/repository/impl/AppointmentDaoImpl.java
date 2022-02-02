@@ -16,9 +16,10 @@ import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 import com.asml.petclinic.model.Appointment;
+import com.asml.petclinic.repository.AbstarctDao;
 
 @Repository
-public class AppointmentDaoImpl {
+public class AppointmentDaoImpl extends AbstarctDao<Appointment>{
 	
     public final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("local");
     
@@ -98,15 +99,16 @@ public class AppointmentDaoImpl {
      * @author mahendra
      */
 
-	public void add(Appointment appointment) {
+	public void add(Appointment e) {
 		
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
-        manager.persist(appointment);
+        manager.persist(e);
         tx.commit();
 
 	}
+	
 
 
 	 

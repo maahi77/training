@@ -35,9 +35,9 @@ public class VetServiceImpl implements VetService {
 	}
 	
 	@Override
-	public void add(Vet vet) {
+	public void add(Vet e) {
           
-		vetDaoImpl.add(vet);
+		vetDaoImpl.add(e);
 	}
 
 }

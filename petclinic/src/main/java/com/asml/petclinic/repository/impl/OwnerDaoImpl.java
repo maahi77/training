@@ -17,9 +17,10 @@ import org.springframework.stereotype.Repository;
 
 import com.asml.petclinic.model.Appointment;
 import com.asml.petclinic.model.Owner;
+import com.asml.petclinic.repository.AbstarctDao;
 
 @Repository
-public class OwnerDaoImpl {
+public class OwnerDaoImpl extends AbstarctDao<Owner>{
 
     public final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("local");
     
@@ -56,10 +57,10 @@ public class OwnerDaoImpl {
      *
      */
 
-	public List<Owner> getByName(String owner_name) {
+	public List<Owner> getByName(String ownername) {
         EntityManager manager = entityManagerFactory.createEntityManager();
-        TypedQuery<Owner> namedQuery = manager.createNamedQuery("Owner.finbyname", Owner.class);
-        namedQuery.setParameter("owner_name",owner_name);
+        TypedQuery<Owner> namedQuery = manager.createNamedQuery("Owner.findbyname", Owner.class);
+        namedQuery.setParameter("ownername",ownername);
         return Optional.ofNullable(namedQuery.getResultList()).orElse(Collections.emptyList());
 
 	}
@@ -79,13 +80,13 @@ public class OwnerDaoImpl {
      */
 
 
-	public List<Owner> getByNameAndNum(String owner_name, Integer num) {
+	public List<Owner> getByNameAndNum(String ownername, Integer num) {
                
 		EntityManager manager=entityManagerFactory.createEntityManager();
     	CriteriaBuilder cb=manager.getCriteriaBuilder();
     	CriteriaQuery cq=cb.createQuery();
     	Root<Owner> owner=cq.from(Owner.class);
-    	javax.persistence.criteria.Predicate namePredicate=cb.equal(owner.get("owner_name"),owner_name);
+    	javax.persistence.criteria.Predicate namePredicate=cb.equal(owner.get("ownername"),ownername);
     	javax.persistence.criteria.Predicate numPredicate=cb.equal(owner.get("num"),num);
     	cq.where(namePredicate,numPredicate);
     	cq.select(owner);
@@ -95,12 +96,12 @@ public class OwnerDaoImpl {
 		
 	}
 	 
-	public void add(Owner owner) {
+	public void add(Owner e) {
 		
         EntityManager manager = entityManagerFactory.createEntityManager();
         EntityTransaction tx = manager.getTransaction();
         tx.begin();
-        manager.persist(owner);
+        manager.persist(e);
         tx.commit();
 
 	}

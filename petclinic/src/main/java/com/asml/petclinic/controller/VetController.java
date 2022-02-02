@@ -20,7 +20,7 @@ public class VetController {
 	
 	@Autowired
   VetService vetService;   
-@GetMapping("/vet")
+@GetMapping("/allvets")
     public List<Vet> getAllAppointments ()
     {
         return vetService.get();
@@ -32,13 +32,13 @@ public class VetController {
         return vetService.findByName(name);
     }
 
-    @GetMapping("/vetlike")
+    @GetMapping("/vetlikename")
     public List<Vet> getByLikeName ( String name)
     {
         return vetService.findByLikeName(name);
     }
     
-    @PostMapping("/vets")
+    @PostMapping("/vets/add")
     public void add(@RequestBody Vet vet) {
     	
     	 vetService.add(vet);

@@ -18,28 +18,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
 @Entity
-@Data
-@ToString
-
-@NamedQuery(name="Pet.findall",query = "select e from Pet e ")
+@NamedQueries ({@NamedQuery(name="Pet.findall",query = "select e from Pet e "),
 @NamedQuery(name="Pet.findbytype",query = "select e from Pet e where e.type=:type")
+})
 @Table(name = "Pets")
 public class Pet {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer pet_id;
+	private Integer petid;
 	private String name;
 	private String type;
 	private int age;
@@ -49,26 +41,26 @@ public class Pet {
 	public Pet() {
 		super();
 	}
-	public Pet(Integer pet_id,String name, String type, int age) {
+	public Pet(Integer petid,String name, String type, int age) {
 		super();
-		this.pet_id=pet_id;
+		this.petid=petid;
 		this.name = name;
 		this.type = type;
 		this.age = age;
 	}
 	@ManyToOne
-	@JoinColumn(name = "owner_name",referencedColumnName = "owner_name")
+	@JoinColumn(name = "ownername",referencedColumnName = "ownername")
 	private Owner owner;
 	@ManyToMany(mappedBy = "pets")
 	private Set<Vet> vets=new HashSet<>();
 
 
 
-	public Integer getPet_id() {
-		return pet_id;
+	public Integer getPetid() {
+		return petid;
 	}
-	public void setPet_id(Integer pet_id) {
-		this.pet_id = pet_id;
+	public void setPet_id(Integer petid) {
+		this.petid = petid;
 	}
 	public String getName() {
 		return name;
@@ -99,6 +91,11 @@ public class Pet {
 	}
 	public void setVets(Set<Vet> vets) {
 		this.vets = vets;
+	}
+	@Override
+	public String toString() {
+		return "Pet [petid=" + petid + ", name=" + name + ", type=" + type + ", age=" + age + ", owner=" + owner
+				+ ", vets=" + vets + "]";
 	}
 
 	

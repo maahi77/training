@@ -24,20 +24,19 @@ public class OwnerServiceImpl implements OwnerService {
 	}
 
 	@Override
-	public List<Owner> findByName(String owner_name) {
-		// TODO Auto-generated method stub
-		return ownerDaoImpl.getByName(owner_name);
+	public List<Owner> findByName(String ownername) {
+		return ownerDaoImpl.getByName(ownername);
 	}
 
 	@Override
-	public List<Owner> findByNameAndNum(String owner_name, Integer num) {
-		return ownerDaoImpl.getByNameAndNum(owner_name,num);
+	public List<Owner> findByNameAndNum(String ownername, Integer num) {
+		return ownerDaoImpl.getByNameAndNum(ownername,num);
 	}
 
 	@Override
-	public void add(Owner owner) {
+	public void add(Owner e) {
           
-		ownerDaoImpl.add(owner);
+		ownerDaoImpl.add(e);
 	}
 
 	  

@@ -24,5 +24,4 @@ public abstract class AbstarctDao<T> {
         manager.merge(e);
     }
 
-
-}
+  }

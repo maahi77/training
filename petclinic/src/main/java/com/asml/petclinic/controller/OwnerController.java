@@ -19,25 +19,25 @@ public class OwnerController {
 	
 	@Autowired
 	OwnerService ownerService;
-    @GetMapping("/owner")
+    @GetMapping("/allowners")
     public List<Owner> getAllAppointments ()
     {
     	
         return ownerService.getOwners();
     }
     
-    @GetMapping("/owner/{owner_name}")
-    public List<Owner> getByDays (@PathVariable(value="owner_name") String owner_name)
+    @GetMapping("/owner/{ownername}")
+    public List<Owner> getByDays (@PathVariable(value="ownername") String ownername)
     {
-        return ownerService.findByName(owner_name);
+        return ownerService.findByName(ownername);
     }
  
     
-    @GetMapping("/owner/{owner_name}/{num}")
-    public List<Owner> getByNumAndName(@PathVariable(value = "owner_name") String owner_name,@PathVariable(value = "num") Integer num){
-    	return ownerService.findByNameAndNum(owner_name, num);
+    @GetMapping("/owner/{ownername}/{num}")
+    public List<Owner> getByNumAndName(@PathVariable(value = "ownername") String ownername,@PathVariable(value = "num") Integer num){
+    	return ownerService.findByNameAndNum(ownername, num);
     }
-    @PostMapping("/owners")
+    @PostMapping("/owners/add")
     public void add(@RequestBody Owner owner) {
     	
     	 ownerService.add(owner);
